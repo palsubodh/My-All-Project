@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a href="admin1.html">Go to Admin Page</a>
+    <title>Document</title>
+    <style>
+        body{
+            background-color: gainsboro;
+        }
+        .product{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+         
+            gap: 30px;
+        }
+        .product>div{
+            width: 250px;
+         text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 10px;
+            border-radius: 5px 5px;
+            background-color: teal;
+        }
+        img{
+            width: 100%;
+        }
+        .btnBox{
+          
+          display: flex;
+          justify-content: space-between;
+         
+        }
+        #sold{
+            border: 0ch;
+            border-radius: 5px;
+            padding: 5px;
+            color: white;
+        }
+        #counter{
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="counter"></div>
+    <div class="product"></div>
+
+    
+</body>
+</html>
+<script>
+    let product = JSON.parse(localStorage.getItem("Products")) || [];
+    var length = product.length;
+    document.getElementById("counter").textContent = `Total Number of Products are ${length}`;
+    product.map(function (el,index) {
+        var box = document.createElement("div");
+       
+
+        var img = document.createElement("img");
+        img.src = el.imageUrl;
+
+        var name = document.createElement("p");
+        // name.setAttribute("class", "name")
+        name.textContent = el.name;
+
+        var category = document.createElement("p");
+        category.textContent = `Category: ${el.category}`;
+
+        var price = document.createElement("p");
+        price.textContent = `Price: $${el.price}`;
+        price.style.fontWeight = "bold"
+
+        var btnBox = document.createElement("div");
+        btnBox.setAttribute("class", "btnBox");
+
+        var removebtn = document.createElement("button");
+        // removebtn.setAttribute("id", "remove");
+        removebtn.textContent = "Remove";
+        removebtn.addEventListener("click", function () {
+            removeItem(el,index);
+        })
+
+        var soldbtn = document.createElement("button");
+        soldbtn.setAttribute("id", "sold");
+        soldbtn.textContent = "Sold";
+        soldbtn.addEventListener("click", function () {
+            changeSoldValue(el);
+        })
+        if(el.sold == "true"){
+            soldbtn.style.backgroundColor = "red";
+        }else if(el.sold == "false"){
+            soldbtn.style.backgroundColor = "green";
+        }
+
+        btnBox.append(removebtn, soldbtn);
+
+        box.append(img, name, category, price, btnBox);
+
+        document.querySelector(".product").append(box);
+    });
+
+    var btn = document.getElementById("sold");
+    console.log(btn.value)
+
+    function removeItem(el, index) {
+        // console.log(el);
+       
+        product.splice(index, 1);
+        localStorage.setItem("Products", JSON.stringify(product));
+        window.location.reload();
+    }
+    function changeSoldValue(el, index) {
+        // console.log(el);
+        if (el.sold == "false") {
+            el.sold = "true";
+        } else if (el.sold == "true") {
+            el.sold = "false";
+        }
+        localStorage.setItem("Products", JSON.stringify(product));
+        window.location.reload();
+    }
+</script>

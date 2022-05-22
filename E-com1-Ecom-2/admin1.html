@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a href="prodcut.html">Go to Products List Page</a>
+    <title>Admin</title>
+    <style>
+       body{
+           background-color: aqua;
+       }
+        #form{
+            display: flex;
+           flex-direction: column;
+           width: 200px;
+           margin: auto;
+           padding: 20px;
+           /* background-color: yellow; */
+           border-radius: 10px;
+           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            
+        }
+        #form>label{
+         margin-top: 20px;
+         margin-bottom: 5px;
+         font-size: 19px;
+        }
+        #add{
+            display: block;
+            
+            margin: auto;
+            font-size: 19px;
+            padding: 8px;
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #add:hover{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+ 
+    <form id="form" onsubmit="myfunction(event)">
+        <label for="">Product Name</label>
+        <input id="name" type="text" placeholder="Name">
+        <label for="">Product Category</label>
+        <input id="category" type="text" placeholder="category">
+        <label for="">ImageURL</label>
+        <input id="image" type="text" placeholder="ImageURL">
+        <label for="">Price</label>
+        <input id="price" type="text" placeholder="Enter Price">
+        <label for="">Gender</label>
+        <select name="" id="gender">
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <label for="">Sold</label>
+       <select name="" id="sold">
+           <option value="false">Sold</option>
+           <option value="false">false</option>
+           <option value="true">true</option>
+       </select>
+       <label for=""></label>
+       <button id="add">Submit</button>
+    </form>
+    
+
+</body>
+</html>
+<script>
+
+let arr = JSON.parse(localStorage.getItem("Products")) || [];
+    function Product(n,c,i,p,g,s){
+        this.name = n,
+        this.category = c,
+        this.imageUrl = i,
+        this.price = p,
+        this.gender = g,
+        this.sold = s
+    };
+
+    function myfunction(e){
+        event.preventDefault();
+        // console.log("inside function")
+        
+
+        let form = document.getElementById("form");
+
+        let Name = form.name.value;
+        let Category = form.category.value;
+        let Image_Url = form.image.value;
+        let Price = form.price.value;
+        let Gender = form.gender.value;
+        let Sold = form.sold.value;
+
+        let p1 = new Product(Name,Category,Image_Url,Price,Gender,Sold);
+        // console.log(p1);
+        arr.push(p1)
+        console.log('arr:', arr)
+        localStorage.setItem("Products", JSON.stringify(arr));
+        window.location.reload();
+        
+    }
+</script>
