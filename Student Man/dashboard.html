@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-evenly;
+             border-radius: 10px;
+            background-color: teal;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+th,
+td {
+  padding: 15px;
+}
+
+tr > th {
+  background-color: teal;
+  color: white;
+}
+#img{
+    width: 100px;
+    height: 100px;
+    
+   
+}
+    </style>
+</head>
+<body>
+    
+    <div id="navbar">
+        <div><p id="w">Web-16</p></div>
+        <div><p id="x">Web-17</p></div>
+        <div><p id="y">Web-18</p></div>
+        <div><p id="z">Web-19</p></div>
+    </div>
+    <a href="student.html">Go to Student Page</a>
+   <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Unit</th>
+            <th>Image</th>
+            <th>Batch</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+
+       <tbody id="shakti"></tbody>
+       
+   </table>
+</body>
+</html>
+
+<script>
+    var Data=JSON.parse(localStorage.getItem("Information"))||[]
+   
+    var Dataarr= JSON.parse(localStorage.getItem("trash"))||[]
+    Data.forEach(function(el,index){
+        var tr = document.createElement("tr")
+        var a= document.createElement("td")
+        a.innerText= el.name;
+        var b = document.createElement("td")
+        b.innerText=el.course;
+       var c = document.createElement("td")
+       c.innerText=el.unit;
+       var d = document.createElement("td")
+
+      var x= document.createElement("img")
+      x.setAttribute("src",el.image)
+      x.setAttribute("id","img")
+       
+       d.append(x)
+       
+       var e = document.createElement("td")
+       e.innerText=el.batch;
+
+       var f=document.createElement("td")
+       var delbtn = document.createElement("button")
+       delbtn.innerText="Remove"
+       delbtn.style.color="blue"
+       delbtn.style.cursor="pointer"
+        f.append(delbtn)
+       delbtn.addEventListener("click", function() {
+    delFunction(el,index);
+  });
+
+       tr.append(a,b,c,d,e,f)
+    //    console.log(tr)
+       document.querySelector("#shakti").append(tr)
+        
+
+    })
+
+
+    function delFunction(el,index){
+       
+  Data.splice(index,1)
+  Dataarr.push(index)
+  localStorage.setItem("Information",JSON.stringify(Data))
+ 
+  localStorage.setItem("trash",JSON.stringify(Dataarr))
+  window.location.reload();
+  
+}
+   
+    
+
+        var count=0
+        var count1=0
+        var count2=0
+        var count3=0
+    Data.forEach(function mycount(el){
+      
+        
+      if(el.batch=="Web-16")
+
+      {
+          count++
+        //   console.log(count)
+          
+      }
+      
+      else if(el.batch=="Web-17")
+      {
+          count1++
+      }
+      
+      else if(el.batch=="Web-18")
+      {
+          count2++
+      }
+      
+      else if(el.batch=="Web-19")
+      {
+          count3++
+      }
+     
+  });
+      document.querySelector("#w").innerText="Web-16-"+count
+      document.querySelector("#x").innerText="Web-17-"+count1
+      document.querySelector("#y").innerText="Web-18-"+count2
+      document.querySelector("#z").innerText="Web-19-"+count3
+</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <style>
+        #form{
+            display: flex;
+           flex-direction: column;
+           width: 200px;
+           margin: auto;
+           margin-top: 30px;
+           padding: 20px;
+           background-color: rgb(124, 164, 240);
+           border-radius: 10px;
+           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            
+        }
+        #form>label{
+         margin-top: 20px;
+         margin-bottom: 5px;
+         font-size: 19px;
+        }
+        #navbar{
+            display: flex;
+            justify-content: space-evenly;
+           border-radius: 10px;
+            background-color: teal;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div id="navbar">
+        <div><p id="w">Web-16</p></div>
+        <div><p id="x">Web-17</p></div>
+        <div><p id="y">Web-18</p></div>
+        <div><p id="z">Web-19</p></div>
+    </div>
+    <a href="dashboard.html">Go to Dashboard</a>
+    <form id="form" onsubmit="Deatils(event)">
+        <label for="">Enter your name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+        <label for="">Type your course</label>
+        <input type="text" id="course" placeholder="Enter your Course">
+        <label for="">Enter your unit</label>
+        <input type="text" id="unit" placeholder="Enter your unit here">
+        <label for="">Upload your image here</label>
+        <input type="text" id="image" placeholder="Upload your image here">
+        <label for="">Select your batch here</label>
+        <select name="" id="batch">
+        <option value="Web-16">Web-16</option>
+        <option value="Web-17">Web-17</option>
+        <option value="Web-18">Web-18</option>
+        <option value="Web-19">Web-19</option>
+        </select>
+        <button id="add">Submit</button>
+
+
+    </form>
+</body>
+</html>
+<script>
+    var Data=JSON.parse(localStorage.getItem("Information"))||[]
+     document.querySelector("#add").addEventListener("click", Details)
+    function Collection(n,c,u,i,b){
+        this.name=n,
+        this.course=c,
+        this.unit=u,
+        this.image=i,
+        this.batch=b
+
+    };
+
+    function Details(){
+        event.preventDefault();
+
+        let form=document.getElementById("form")
+
+        let Name =form.name.value;
+        let Course= form.course.value;
+        let Unit = form.unit.value;
+        let Image = form.image.value;
+        var Batch = form.batch.value;
+
+        let Show = new Collection(Name,Course,Unit,Image,Batch)
+        // console.log(Show)
+        Data.push(Show)
+        console.log('Data:', Data)
+        localStorage.setItem("Information",JSON.stringify(Data))
+        window.location.reload();
+    }
+
+    
+        var count=0
+        var count1=0
+        var count2=0
+        var count3=0
+
+    Data.forEach(function mycount(el){
+      
+        
+        if(el.batch=="Web-16")
+        {
+            count++
+            
+        }
+        
+        else if(el.batch=="Web-17")
+        {
+            count1++
+        }
+        
+        else if(el.batch=="Web-18")
+        {
+            count2++
+        }
+        
+        else if(el.batch=="Web-19")
+        {
+            count3++
+        }
+       
+    });
+        document.querySelector("#w").innerText="Web-16-"+count
+        document.querySelector("#x").innerText="Web-17-"+count1
+        document.querySelector("#y").innerText="Web-18-"+count2
+        document.querySelector("#z").innerText="Web-19-"+count3
+
+
+</script>
