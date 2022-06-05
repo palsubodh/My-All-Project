@@ -1,0 +1,63 @@
+
+   
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Amount</title>
+    <style>
+      #navbar{
+        display: flex;
+        justify-content: space-between;
+        
+      }
+      #add-money{
+        width: 40%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+      button{
+        width: 20%;
+        border-radius: 10px;
+
+      }
+      body{
+        background-color: blue;
+        color: white;
+      }
+      #head{
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: bold;
+      }
+      button:hover{
+        background-color: blue;
+        color: white;
+        
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 id="head">Paytm Movies</h1>
+    <div id="navbar">
+      <h1>Add Money to wallet</h1>
+   
+    <h1 id="wallet"></h1>
+    </div>
+    <div id="add-money">
+      <input type="number" id="amount" placeholder="Enter amount in rupees">
+  
+      <button id="add_to_wallet" onclick="myfunction()">Add to wallet</button>
+    
+      <button id="book_movies" onclick="window.location.href=`movies.html`">Book Movies</button>
+     
+    </div>
+  </body>
+</html>
+<script src="index.js"></script>
