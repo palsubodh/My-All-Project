@@ -1,0 +1,30 @@
+body{
+    background-color: rgb(0, 174, 255);
+    
+}
+#result{
+
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(5,1fr);
+}
+a{
+    font-size: x-large;
+    text-decoration: none;
+    color: white;
+    /* border: 2px solid red; */
+    /* margin:20px 50px; */
+}
+#nav{
+    margin: 15px 25px;
+}
+#title{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+#result>div>img{
+    width: 100%;
+}
